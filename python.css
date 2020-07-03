@@ -1,0 +1,22 @@
+body {
+    background-color: dodgerblue;
+}
+
+#main {
+    background-color: white;
+    width: 800;
+    height: 6000;
+    margin: auto;
+}
+
+img {
+    width: 600;
+    height: 300;
+}
+
+.code {
+    background-color: black;
+    color: beige;
+    height: 50;
+    width: 300;
+}
