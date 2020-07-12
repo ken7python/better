@@ -5,7 +5,7 @@ body {
 #main {
     background-color: white;
     width: 800;
-    height: 6000;
+    height: 7000;
     margin: auto;
 }
 
@@ -17,6 +17,6 @@ img {
 .code {
     background-color: black;
     color: beige;
-    height: 50;
+    height: 100;
     width: 300;
 }
