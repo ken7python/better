@@ -10,8 +10,13 @@
     <p>
       Windows で C言語でプログラムを書いて、ビルド(コンパイル)して、実行する方法を共有します。
     </p>
+    <p>
+      <a href="#create_env">1. C言語の環境を構築する</a><br>
+      <a href="#build_program">2. C言語でプログラムを書いてビルド(コンパイル)し、実行する</a><br>
+    </p>
 
-    <h2>C言語の環境を構築する</h2>
+    
+    <h2 id="create_env">1. C言語の環境を構築する</h2>
 
     <p>
       ここでは、Windowsの上で Linux の環境が使える WSL(Windows Subsystems for Linux) を使って、<br>
@@ -20,21 +25,21 @@
     </p>
     
     <ul>
-      <li>1. WSLが使えるようにWindowsを設定する</li>
-      <li>1.  WSLにUbuntuをインストールする</li>
-      <li>2. UbuntuにGCCをインストールする</li>
+      <li>WSLが使えるようにWindowsを設定する</li>
+      <li>WSLにUbuntuをインストールする</li>
+      <li>UbuntuにGCCをインストールする</li>
     </ul>
 
-    <h3>1. WSLが使えるようにWindowsを設定する + WSLにUbuntuをインストールする</h3>
+    <h3>1-1. WSLが使えるようにWindowsを設定する + WSLにUbuntuをインストールする</h3>
     <p>
       <a href="https://docs.microsoft.com/ja-jp/windows/wsl/install-win10" target="_blank">Microsoft 社のドキュメント</a>を参考にしてインストールしてください。<br>
       コマンドプロンプトを立ち上げ bash コマンドを発行したときに下記のような画面表示になっていれば準備完了です。<br>
       <a href="c_languageimg/wsl02.png" target="_blank"><img src="c_languageimg/wsl02.png" style="width:600px;"></a>
     </p>
 
-    <h3>2. UbuntuにGCCをインストールする</h3>
+    <h3>1-2. UbuntuにGCCをインストールする</h3>
     <p>
-      最初にパッケージ一覧を更新します。下記のコマンドを入力して Enter を押します。
+      最初にパッケージ一覧を更新します。下記のコマンドを入力して [Enter] キー を押します。
     </p>
     <pre class="terminal_print" style="width:600px;">
 $ sudo apt update
@@ -45,7 +50,7 @@ $ sudo apt update
     <a href="c_languageimg/wsl03.png" target="_blank"><img src="c_languageimg/wsl03.png" style="width:50%;"></a>
     <p>
       パッケージ一覧の更新が完了するとコマンドを入力できるようになるので、gcc (C言語のコンパイラ) をインストールします｡<br>
-      下記のコマンドを入力して Enter を押します。([Y/n] が表示されたら Yキーを押して続行します。)
+      下記のコマンドを入力して [Enter] キー を押します。([Y/n] が表示されたら [Y] キーを押して続行します。)
     </p>
     <pre class="terminal_print" style="width:600px;">
 $ sudo apt install gcc
@@ -57,7 +62,137 @@ $ sudo apt install gcc
     <a href="c_languageimg/wsl05.png" target="_blank"><img src="c_languageimg/wsl05.png" style="width:50%;"></a>
     
     
-    <h2>C言語でプログラムを書いてビルド(コンパイル)実行する</h2>
+    <h2 id="build_program">2. C言語でプログラムを書いてビルド(コンパイル)し、実行する</h2>
+
+    <p>
+      ここでは、WSL を使ってインストールされた Ubuntu 上で、<br>
+      テキストエディタ nano を使用してソースコードを編集し、<br>
+      GCC を使用してソースコードをビルド(コンパイル)します。<br>
+      下記の手順で進めていきます。
+    </p>
+    
+    <ul>
+      <li>作業場所のディレクトリを作成する</li>
+      <li>ソースコードのファイルを作成する</li>
+      <li>ソースコードを編集する</li>
+      <li>ソースコードをビルド(コンパイル)する</li>
+      <li>プログラムを実行する</li>
+    </ul>
+    
+    <h3>2-1. bashに入る</h3>
+    <p>
+      コマンドプロンプトを立ち上げ bash コマンドを発行します。<br>
+      <a href="c_languageimg/gcc01.png" target="_blank"><img src="c_languageimg/gcc01.png" style="width:50%;"></a>
+    </p>
+    
+    <h3>2-2. ソースコードのファイルを準備する</h3>
+    下記のコマンドを入力して [Enter] キー を押すと、cgengo というディレクトリが作成されます。
+    <pre class="terminal_print" style="width:600px;">
+$ mkdir cgengo
+    </pre>
+    下記のコマンドを入力して [Enter] キー を押すと、ディレクトリ cgengo の中に移動します。<br>
+    (カレントディレクトリが cgengo に変更されます)
+    <pre class="terminal_print" style="width:600px;">
+$ cd cgengo
+    </pre>
+    下記のコマンドを入力して [Enter] キー を押すと、ディレクトリ cgengo の中身が表示されます。<br>
+    (まだ何もないはずです)
+    <pre class="terminal_print" style="width:600px;">
+$ ls
+    </pre>
+    <p>
+      <a href="c_languageimg/gcc02.png" target="_blank"><img src="c_languageimg/gcc02.png" style="width:50%;"></a>
+    </p>
+
+    続いて、下記のコマンドを入力して [Enter] キー を押すと、test1.c という空のファイルが作成されます。
+    <pre class="terminal_print" style="width:600px;">
+$ touch test1.c
+    </pre>
+    下記のコマンドを入力して [Enter] キー を押すと、ディレクトリ cgengo の中身が表示されます。<br>
+    (今度は test1.c が表示されます)
+    <pre class="terminal_print" style="width:600px;">
+$ ls
+    </pre>
+    <p>
+      <a href="c_languageimg/gcc03.png" target="_blank"><img src="c_languageimg/gcc03.png" style="width:50%;"></a>
+    </p>
+
+    <h3>2-3. テキストエディタ(nano)を起動する</h3>
+    続いて、下記のコマンドを入力して [Enter] キー を押すと、テキストエディタ nano が起動し、<br>
+    test1.c を編集する状態になります。
+    <pre class="terminal_print" style="width:600px;">
+$ nano test1.c
+    </pre>
+    <p>
+      <a href="c_languageimg/gcc04.png" target="_blank"><img src="c_languageimg/gcc04.png" style="width:50%;"></a>
+    </p>
+    まだ何も書かれていません。
+    <p>
+      <a href="c_languageimg/gcc05.png" target="_blank"><img src="c_languageimg/gcc05.png" style="width:50%;"></a>
+    </p>
+    
+    <h3>2-4. プログラムを書く</h3>
+    下記のようにプログラムを入力します。<br>
+    * カーソルは矢印キーで移動できます。<br>
+    * 間違えたときは [Back Space] キーや [Delete] キーで修正できます。
+    <pre class="terminal_print" style="width:600px;">
+#include &lt;stdio.h&gt;
+void main () {
+    printf(&quot;hello&quot;);
+}
+    </pre>
+    <p>
+      <a href="c_languageimg/gcc06.png" target="_blank"><img src="c_languageimg/gcc06.png" style="width:50%;"></a>
+    </p>
+
+    <h3>2-5. テキストファイルを保存する</h3>
+    [Ctrl] + [X] キーを押すと nano を終了しようとします。<br>
+    ここでファイルが変更されているため保存するかどうか聞かれるので [Y] キーを押して保存に進みます。
+    <p>
+      <a href="c_languageimg/gcc07.png" target="_blank"><img src="c_languageimg/gcc07.png" style="width:50%;"></a>
+    </p>
+    保存するファイル名の確認が表示されるので、変更せずに [Enter] キーを押して確定します。
+    <p>
+      <a href="c_languageimg/gcc08.png" target="_blank"><img src="c_languageimg/gcc08.png" style="width:50%;"></a>
+    </p>
+    nano が終了して bash の画面にもどります。
+    <p>
+      <a href="c_languageimg/gcc09.png" target="_blank"><img src="c_languageimg/gcc09.png" style="width:50%;"></a>
+    </p>
+    
+    <h3>2-6. ソースコードをビルド(コンパイル)する</h3>
+    下記のコマンドを入力して [Enter] キー を押すと、ディレクトリ cgengo の中身が表示されます。<br>
+    (まだソースコードの test1.c しかありません)
+    <pre class="terminal_print" style="width:600px;">
+$ ls
+    </pre>
+    <p>
+      <a href="c_languageimg/gcc10.png" target="_blank"><img src="c_languageimg/gcc10.png" style="width:50%;"></a>
+    </p>
+    
+    下記のコマンドを入力して [Enter] キー を押すと、ソースコードがビルド(コンパイル)されます。<br>
+    <pre class="terminal_print" style="width:600px;">
+$ gcc test1.c
+    </pre>
+    続いて、下記のコマンドを入力して [Enter] キー を押すと、ディレクトリ cgengo の中身が表示されます。<br>
+    (a.out というファイルが増えています。これがコンパイルされたプログラムです。)
+    <pre class="terminal_print" style="width:600px;">
+$ ls
+    </pre>
+    <p>
+      <a href="c_languageimg/gcc11.png" target="_blank"><img src="c_languageimg/gcc11.png" style="width:50%;"></a>
+    </p>
+    
+    <h3>2-7. プログラムを実行する</h3>
+    下記のコマンドを入力して [Enter] キー を押すと、プログラムが実行されます。<br>
+    hello と表示されれば成功です!
+    <pre class="terminal_print" style="width:600px;">
+$ ./a.out
+    </pre>
+    <p>
+      <a href="c_languageimg/gcc12.png" target="_blank"><img src="c_languageimg/gcc12.png" style="width:50%;"></a>
+    </p>
+
     
   </body>
 </html>
