@@ -1,0 +1,15 @@
+body {
+    background-color:  dodgerblue;
+}
+
+div {
+    background-color: white;
+    width: 800;
+    height: 5300;
+    margin: auto;
+}
+
+img {
+    width: 600;
+    height: 300;
+}
