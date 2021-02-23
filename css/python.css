@@ -4,19 +4,21 @@ body {
 
 #main {
     background-color: white;
-    width: 800;
-    height: 7200;
+    width: 80vw;
     margin: auto;
+    padding: 6px;
 }
 
 img {
     width: 600;
     height: 300;
+    margin: auto;
 }
 
 .code {
     background-color: black;
     color: beige;
-    height: 100;
     width: 300;
+    padding: 6px;
+    font-family:monospace;
 }
